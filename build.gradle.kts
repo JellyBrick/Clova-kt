@@ -44,3 +44,12 @@ val sourcesJar by tasks.registering(Jar::class) {
     from(sourceSets["main"].allSource)
     archiveClassifier.set("sources")
 }
+
+publishing {
+    publications {
+        register<MavenPublication>("ClovaTTS-kt") {
+            from(components["java"])
+            artifact(sourcesJar)
+        }
+    }
+}
