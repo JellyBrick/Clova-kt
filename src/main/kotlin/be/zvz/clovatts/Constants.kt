@@ -13,7 +13,7 @@ object Constants {
 
     val SPEAKERS = mapOf(
         Language.ENGLISH to Speakers(arrayOf(Speaker("matt")), arrayOf(Speaker("clara"))),
-        Language.KOREAN to Speakers(arrayOf(Speaker("kyuri")), arrayOf(Speaker("jinho"))),
+        Language.KOREAN to Speakers(arrayOf(Speaker("jinho")), arrayOf(Speaker("kyuri"))),
         Language.JAPANESE to Speakers(arrayOf(Speaker("shinji")), arrayOf(Speaker("yuri"), Speaker("nsayuri"))),
         Language.CHINESE to Speakers(arrayOf(Speaker("liangliang")), arrayOf(Speaker("meimei"))),
         Language.SPANISH to Speakers(arrayOf(Speaker("jose")), arrayOf(Speaker("carmen")))
