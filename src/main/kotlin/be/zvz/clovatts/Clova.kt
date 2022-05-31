@@ -21,7 +21,7 @@ class Clova @JvmOverloads constructor(
                 .Builder()
                 .addEncoded("service", "dictionary")
                 .addEncoded("speech_fmt", "mp3")
-                .addEncoded("text", text)
+                .add("text", text)
                 .addEncoded("speaker", speaker.name)
                 .addEncoded("speed", speed.code.toString())
                 .build()
