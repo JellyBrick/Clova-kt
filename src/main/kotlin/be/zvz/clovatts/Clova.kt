@@ -16,6 +16,7 @@ class Clova @JvmOverloads constructor(
         speed: Speed
     ): Request = Request.Builder()
         .url(Constants.TEXT_TO_SPEECH_ENDPOINT)
+        .header("Referer", "https://dict.naver.com")
         .post(
             FormBody
                 .Builder()
