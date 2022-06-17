@@ -28,7 +28,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // okhttp
-    api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.8")
+    api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.9")
 
     // Use the Kotlin JDK 8 standard library.
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
