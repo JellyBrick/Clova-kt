@@ -13,8 +13,6 @@ repositories {
 }
 
 tasks.withType<KotlinCompile> {
-    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-    targetCompatibility = JavaVersion.VERSION_1_8.toString()
     kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 }
 
