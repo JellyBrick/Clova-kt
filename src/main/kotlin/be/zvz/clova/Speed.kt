@@ -1,4 +1,4 @@
-package be.zvz.clovatts
+package be.zvz.clova
 
 enum class Speed(val code: Int) {
     SLOW_5(5),

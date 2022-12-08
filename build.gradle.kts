@@ -28,6 +28,9 @@ dependencies {
     // okhttp
     api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.10")
 
+    // Jackson
+    implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.14.1")
+
     // Use the Kotlin JDK 8 standard library.
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
 
