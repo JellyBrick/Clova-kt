@@ -25,8 +25,6 @@ class NSMTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
                     .Builder()
                     .addEncoded("agree", agreeToUsingTextData.toString())
                     .addEncoded("dict", enableDictionary.toString())
-                    .addEncoded("holorific", "false")
-                    .addEncoded("instant", "false")
                     .addEncoded("locale", "ko-Kore_KR")
                     .addEncoded("reference", "KEYBOARD")
                     .addEncoded("source", language.source.code)
