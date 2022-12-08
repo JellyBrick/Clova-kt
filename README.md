@@ -6,10 +6,6 @@
 
 ## Install (maven, gradle...etc)
 
-### GitHub Packages
-
-https://github.com/JellyBrick/alsong-kt/packages/828660
-
 ### Jitpack [![Jitpack Status](https://jitpack.io/v/JellyBrick/Clova-kt.svg)](https://jitpack.io/#JellyBrick/Clova-kt)
 
 ```groovy
