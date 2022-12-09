@@ -19,14 +19,14 @@ object Constants {
         Language.TRADITIONAL_CHINESE to "Traditional Chinese",
         Language.SIMPLIFIED_CHINESE to "Simplified Chinese",
         Language.SPANISH to "Spanish",
-        Language.FRANCE to "French",
-        Language.DEUTSCH to "German",
+        Language.FRENCH to "French",
+        Language.DUTCH to "Dutch",
         Language.RUSSIAN to "Russian",
         Language.PORTUGUESE to "Portuguese",
         Language.ITALIAN to "Italian",
         Language.VIETNAMESE to "Vietnamese",
         Language.THAI to "Thai",
-        Language.MALAY_INDONESIAN to "Malay",
+        Language.INDONESIAN to "Indonesian",
         Language.HINDI to "Hindi"
     )
 

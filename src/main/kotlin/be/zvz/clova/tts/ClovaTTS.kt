@@ -58,11 +58,11 @@ class ClovaTTS(okHttpClient: OkHttpClient) : TextToSpeech(okHttpClient) {
                 arrayOf(Constants.Speaker("jose")),
                 arrayOf(Constants.Speaker("carmen"))
             ),
-            Language.FRANCE to Constants.Speakers(
+            Language.FRENCH to Constants.Speakers(
                 arrayOf(Constants.Speaker("louis")),
                 arrayOf(Constants.Speaker("roxane"))
             ),
-            Language.DEUTSCH to Constants.Speakers(
+            Language.DUTCH to Constants.Speakers(
                 arrayOf(Constants.Speaker("tim")),
                 arrayOf(Constants.Speaker("lena"))
             ),

@@ -8,13 +8,13 @@ enum class Language(val code: String) {
     TRADITIONAL_CHINESE("zh-TW"),
     SIMPLIFIED_CHINESE("zh-CN"),
     SPANISH("es"),
-    FRANCE("fr"),
-    DEUTSCH("de"),
+    FRENCH("fr"),
+    DUTCH("de"),
     RUSSIAN("ru"),
     PORTUGUESE("pt"),
     ITALIAN("it"),
     VIETNAMESE("vi"),
     THAI("th"),
-    MALAY_INDONESIAN("id"),
+    INDONESIAN("id"),
     HINDI("hi")
 }
