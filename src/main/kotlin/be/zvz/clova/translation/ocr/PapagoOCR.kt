@@ -26,7 +26,7 @@ class PapagoOCR(
         val sign = Auth.signUrl(okHttpClient, url)
 
         return Request.Builder()
-            .url(Auth.urlToSignedUrl(url, sign))
+            .url(Auth.toSignedUrl(url, sign))
             .header("User-Agent", Constants.USER_AGENT)
             .post(
                 MultipartBody

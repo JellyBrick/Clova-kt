@@ -18,7 +18,7 @@ class ClovaTTS(okHttpClient: OkHttpClient) : TextToSpeech(okHttpClient) {
         val url = Constants.Url.PAPAGO + "tts/makeTTS"
         val sign = Auth.signUrl(okHttpClient, url)
         return Request.Builder()
-            .url(Auth.urlToSignedUrl(url, sign))
+            .url(Auth.toSignedUrl(url, sign))
             .header("User-Agent", Constants.USER_AGENT)
             .post(
                 FormBody
