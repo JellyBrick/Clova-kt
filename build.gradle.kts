@@ -26,7 +26,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // okhttp
-    api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.10")
+    api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.11")
 
     // Jackson
     implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.14.1")
