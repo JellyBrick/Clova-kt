@@ -19,5 +19,7 @@ data class Result(
     @JsonProperty("tarLangType")
     val targetLanguageType: String,
     val translatedText: String,
-    val engineType: String
+    val engineType: String,
+    @JsonProperty("modelVer")
+    val modelVersion: String?
 )
