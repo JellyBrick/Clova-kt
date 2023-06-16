@@ -15,7 +15,7 @@ class ClovaTest {
                 language = LanguageSetting(Language.AUTO, Language.JAPANESE),
                 text = "수고하셨습니다.\n번역기를 사용한 문장인데 어색하지는 않나요?",
                 agreeToUsingTextData = false,
-                enableDictionary = true
+                enableDictionary = true,
             )
             println(translate)
             assertNull(translate.errorCode)
@@ -30,7 +30,7 @@ class ClovaTest {
                 language = LanguageSetting(Language.KOREAN, Language.ENGLISH),
                 text = "수고하셨습니다.\n번역기를 사용한 문장인데 어색하지는 않나요?",
                 agreeToUsingTextData = false,
-                enableDictionary = true
+                enableDictionary = true,
             )
             println(translate)
             assertNull(translate.errorCode)
@@ -45,7 +45,7 @@ class ClovaTest {
                 language = LanguageSetting(Language.JAPANESE, Language.KOREAN),
                 text = "ラインID交換する？",
                 agreeToUsingTextData = false,
-                enableDictionary = true
+                enableDictionary = true,
             )
             println(translate)
             assertNull(translate.errorCode)
@@ -60,7 +60,7 @@ class ClovaTest {
                 language = LanguageSetting(Language.JAPANESE, Language.ENGLISH),
                 text = "ラインID交換する？",
                 agreeToUsingTextData = false,
-                enableDictionary = true
+                enableDictionary = true,
             )
             println(translate)
             assertNull(translate.errorCode)
@@ -73,7 +73,7 @@ class ClovaTest {
         val speechArr = classUnderTest.tts.getValue(Clova.TTS.CLOVA).doTextToSpeech(
             text = "다람쥐 헌 쳇바퀴 위에 올라가, 3000% 팝필터팝팝",
             speaker = ClovaTTS.SPEAKERS.getValue(Language.KOREAN).female.first(),
-            speed = Speed.NORMAL
+            speed = Speed.NORMAL,
         )
         println(speechArr.size)
         assertTrue(speechArr.isNotEmpty())
@@ -84,7 +84,7 @@ class ClovaTest {
         val speechArr = classUnderTest.tts.getValue(Clova.TTS.CLOVA).doTextToSpeech(
             text = "다람쥐 헌 쳇바퀴 위에 올라가, 3000% 팝필터팝팝",
             speaker = ClovaTTS.SPEAKERS.getValue(Language.KOREAN).male.first(),
-            speed = Speed.NORMAL
+            speed = Speed.NORMAL,
         )
         println(speechArr.size)
         assertTrue(speechArr.isNotEmpty())
@@ -95,7 +95,7 @@ class ClovaTest {
         val speechArr = classUnderTest.tts.getValue(Clova.TTS.CLOVA).doTextToSpeech(
             text = "お疲れ様でした！",
             speaker = ClovaTTS.SPEAKERS.getValue(Language.JAPANESE).male.first(),
-            speed = Speed.NORMAL
+            speed = Speed.NORMAL,
         )
         println(speechArr.size)
         assertTrue(speechArr.isNotEmpty())
@@ -106,7 +106,7 @@ class ClovaTest {
         val speechArr = classUnderTest.tts.getValue(Clova.TTS.CLOVA).doTextToSpeech(
             text = "吃饭了吗？",
             speaker = ClovaTTS.SPEAKERS.getValue(Language.SIMPLIFIED_CHINESE).male.first(),
-            speed = Speed.NORMAL
+            speed = Speed.NORMAL,
         )
         println(speechArr.size)
         assertTrue(speechArr.isNotEmpty())
@@ -132,7 +132,7 @@ class ClovaTest {
         val classUnderTest = Clova()
         val ocr = classUnderTest.ocr.getValue(Clova.OCR.PAPAGO).doOCR(
             language = LanguageSetting(Language.AUTO, Language.KOREAN),
-            image = getImageBytes("https://upload.wikimedia.org/wikipedia/commons/a/a6/Japanese_Residence_Card_Sample.jpg")
+            image = getImageBytes("https://upload.wikimedia.org/wikipedia/commons/a/a6/Japanese_Residence_Card_Sample.jpg"),
         )
         println(ocr)
         assertNull(ocr.errorCode)

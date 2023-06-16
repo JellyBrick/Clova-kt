@@ -11,5 +11,5 @@ enum class Speed(val code: Int) {
     FAST_2(-2),
     FAST_3(-3),
     FAST_4(-4),
-    FAST_5(-5)
+    FAST_5(-5),
 }

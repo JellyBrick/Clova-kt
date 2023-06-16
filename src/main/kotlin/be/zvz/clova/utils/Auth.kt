@@ -18,8 +18,8 @@ object Auth {
         init(
             SecretKeySpec(
                 Constants.KEY.toByteArray(),
-                algorithm
-            )
+                algorithm,
+            ),
         )
     }
 
@@ -33,7 +33,7 @@ object Auth {
             .url(Constants.Url.CURRENT_TIME)
             .header("User-Agent", Constants.USER_AGENT)
             .get()
-            .build()
+            .build(),
     ).execute().body.string().toLongOrDefault(System.currentTimeMillis())
 
     fun signUrl(okHttpClient: OkHttpClient, url: String): Signature {
@@ -53,9 +53,9 @@ object Auth {
             currentTimestamp,
             Base64.getEncoder().encodeToString(
                 mac.doFinal(
-                    (url.substring(0, min(255, url.length)) + currentTimestamp).toByteArray()
-                )
-            )
+                    (url.substring(0, min(255, url.length)) + currentTimestamp).toByteArray(),
+                ),
+            ),
         )
     }
 
@@ -64,6 +64,6 @@ object Auth {
 
     data class Signature(
         val timestamp: Long,
-        val hmac: String
+        val hmac: String,
     )
 }

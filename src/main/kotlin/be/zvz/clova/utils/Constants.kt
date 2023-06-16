@@ -27,15 +27,15 @@ object Constants {
         Language.VIETNAMESE to "Vietnamese",
         Language.THAI to "Thai",
         Language.INDONESIAN to "Indonesian",
-        Language.HINDI to "Hindi"
+        Language.HINDI to "Hindi",
     )
 
     class Speakers(
         val male: Array<Speaker>,
-        val female: Array<Speaker>
+        val female: Array<Speaker>,
     )
 
     data class Speaker(
-        val name: String
+        val name: String,
     )
 }

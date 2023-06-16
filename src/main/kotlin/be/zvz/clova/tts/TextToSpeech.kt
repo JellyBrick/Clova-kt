@@ -11,13 +11,13 @@ abstract class TextToSpeech(protected val okHttpClient: OkHttpClient) {
         text: String,
         speaker: Constants.Speaker,
         speed: Speed,
-        volume: Int = 4
+        volume: Int = 4,
     ): Request
 
     fun doTextToSpeech(
         text: String,
         speaker: Constants.Speaker,
-        speed: Speed
+        speed: Speed,
     ): ByteArray = okHttpClient.newCall(buildTTSRequest(text, speaker, speed)).execute().use { response ->
         val bytes = response.body.bytes()
         if (bytes.isNotEmpty()) {

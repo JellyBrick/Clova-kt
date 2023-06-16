@@ -7,5 +7,5 @@ data class DetectResponse(
     val target: String?,
     val renderedImage: String?,
     val errorCode: String?,
-    val errorMessage: String?
+    val errorMessage: String?,
 )

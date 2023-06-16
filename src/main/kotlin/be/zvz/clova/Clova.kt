@@ -14,37 +14,37 @@ class Clova @JvmOverloads constructor(
         .Builder()
         .build(),
     private val objectMapper: ObjectMapper = jacksonObjectMapper()
-        .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
+        .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false),
 ) {
     val translation by lazy {
         mapOf(
             Translation.N2MT to N2MTTranslate(okHttpClient, objectMapper),
-            Translation.NSMT to NSMTTranslate(okHttpClient, objectMapper)
+            Translation.NSMT to NSMTTranslate(okHttpClient, objectMapper),
         )
     }
 
     val tts by lazy {
         mapOf(
-            TTS.CLOVA to ClovaTTS(okHttpClient)
+            TTS.CLOVA to ClovaTTS(okHttpClient),
         )
     }
 
     val ocr by lazy {
         mapOf(
-            OCR.PAPAGO to PapagoOCR(okHttpClient, objectMapper)
+            OCR.PAPAGO to PapagoOCR(okHttpClient, objectMapper),
         )
     }
 
     enum class Translation {
         N2MT,
-        NSMT
+        NSMT,
     }
 
     enum class TTS {
-        CLOVA
+        CLOVA,
     }
 
     enum class OCR {
-        PAPAGO
+        PAPAGO,
     }
 }

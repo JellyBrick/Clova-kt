@@ -12,5 +12,5 @@ data class Ocr(
     @JsonProperty("RB")
     val rb: Coordinate,
     val lang: String,
-    val text: String
+    val text: String,
 )

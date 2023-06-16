@@ -16,5 +16,5 @@ enum class Language(val code: String) {
     VIETNAMESE("vi"),
     THAI("th"),
     INDONESIAN("id"),
-    HINDI("hi")
+    HINDI("hi"),
 }

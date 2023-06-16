@@ -9,5 +9,5 @@ data class Message(
     @JsonProperty("@version")
     val version: String,
     @JsonProperty("@type")
-    val type: String
+    val type: String,
 )

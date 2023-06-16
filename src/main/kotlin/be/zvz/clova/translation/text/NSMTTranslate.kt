@@ -13,7 +13,7 @@ class NSMTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
         language: LanguageSetting,
         text: String,
         agreeToUsingTextData: Boolean,
-        enableDictionary: Boolean
+        enableDictionary: Boolean,
     ): Request {
         val url = Constants.Url.PAPAGO + "nsmt/translate"
         val sign = Auth.signUrl(okHttpClient, url)
@@ -33,7 +33,7 @@ class NSMTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
                     .addEncoded("target", language.target.code)
                     .add("text", text)
                     .addEncoded("wsd", "false")
-                    .build()
+                    .build(),
             ).build()
     }
 }

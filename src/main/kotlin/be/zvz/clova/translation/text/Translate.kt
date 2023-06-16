@@ -10,20 +10,20 @@ import java.io.BufferedInputStream
 
 abstract class Translate(
     protected val okHttpClient: OkHttpClient,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) {
     abstract fun buildTranslateRequest(
         language: LanguageSetting,
         text: String,
         agreeToUsingTextData: Boolean,
-        enableDictionary: Boolean
+        enableDictionary: Boolean,
     ): Request
 
     fun translate(
         language: LanguageSetting,
         text: String,
         agreeToUsingTextData: Boolean,
-        enableDictionary: Boolean
+        enableDictionary: Boolean,
     ): TranslateResponse {
         okHttpClient.newCall(buildTranslateRequest(language, text, agreeToUsingTextData, enableDictionary))
             .execute()

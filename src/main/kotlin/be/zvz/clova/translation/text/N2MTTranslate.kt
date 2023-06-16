@@ -13,7 +13,7 @@ class N2MTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
         language: LanguageSetting,
         text: String,
         agreeToUsingTextData: Boolean,
-        enableDictionary: Boolean
+        enableDictionary: Boolean,
     ): Request = buildTranslateRequestWithOptionalParameters(language, text, agreeToUsingTextData, enableDictionary)
 
     fun buildTranslateRequestWithOptionalParameters(
@@ -23,7 +23,7 @@ class N2MTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
         enableDictionary: Boolean,
         honorific: Boolean = false,
         instant: Boolean = false,
-        dictDisplay: Int = -1
+        dictDisplay: Int = -1,
     ): Request {
         val url = Constants.Url.PAPAGO + "n2mt/translate"
         val sign = Auth.signUrl(okHttpClient, url)
@@ -50,7 +50,7 @@ class N2MTTranslate(okHttpClient: OkHttpClient, objectMapper: ObjectMapper) : Tr
                     .addEncoded("target", language.target.code)
                     .add("text", text)
                     .addEncoded("wsd", "false")
-                    .build()
+                    .build(),
             ).build()
     }
 }

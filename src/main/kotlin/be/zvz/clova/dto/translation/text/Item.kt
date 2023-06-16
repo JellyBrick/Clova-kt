@@ -13,5 +13,5 @@ data class Item(
     val gdid: String,
     val hanjaEntry: String?,
     val expDicTypeForm: String?,
-    val expEntrySuperscript: String?
+    val expEntrySuperscript: String?,
 )

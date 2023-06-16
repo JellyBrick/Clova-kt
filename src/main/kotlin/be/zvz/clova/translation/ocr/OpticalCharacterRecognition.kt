@@ -10,16 +10,16 @@ import java.io.BufferedInputStream
 
 abstract class OpticalCharacterRecognition(
     protected val okHttpClient: OkHttpClient,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) {
     abstract fun buildOCRRequest(
         language: LanguageSetting,
-        image: ByteArray
+        image: ByteArray,
     ): Request
 
     fun doOCR(
         language: LanguageSetting,
-        image: ByteArray
+        image: ByteArray,
     ): DetectResponse {
         okHttpClient.newCall(buildOCRRequest(language, image))
             .execute()

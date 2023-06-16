@@ -21,5 +21,5 @@ data class Result(
     val translatedText: String,
     val engineType: String,
     @JsonProperty("modelVer")
-    val modelVersion: String?
+    val modelVersion: String?,
 )

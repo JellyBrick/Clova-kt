@@ -14,7 +14,7 @@ import java.security.MessageDigest
 
 class PapagoOCR(
     okHttpClient: OkHttpClient,
-    objectMapper: ObjectMapper
+    objectMapper: ObjectMapper,
 ) : OpticalCharacterRecognition(okHttpClient, objectMapper) {
     private fun sha512(source: ByteArray): String = MessageDigest
         .getInstance("SHA-512")
@@ -45,7 +45,7 @@ class PapagoOCR(
                             "all"
                         } else {
                             language.source.code
-                        }
+                        },
                     )
                     .addFormDataPart(
                         "source",
@@ -53,16 +53,16 @@ class PapagoOCR(
                             language.target.code
                         } else {
                             language.source.code
-                        }
+                        },
                     )
                     .addFormDataPart("target", language.target.code)
                     .addFormDataPart("langDetect", isSourceAuto.toString())
                     .addFormDataPart(
                         "image",
                         "image",
-                        image.toRequestBody("application/octet-stream".toMediaType(), 0, image.size)
+                        image.toRequestBody("application/octet-stream".toMediaType(), 0, image.size),
                     )
-                    .build()
+                    .build(),
             ).build()
     }
 }
