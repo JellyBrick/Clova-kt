@@ -25,6 +25,8 @@ class PapagoOCR(
         val url = Constants.Url.PAPAGO + "ocr/detect"
         val sign = Auth.signUrl(okHttpClient, url)
 
+        val isSourceAuto = language.source == Language.AUTO
+
         return Request.Builder()
             .url(Auth.toSignedUrl(url, sign))
             .header("User-Agent", Constants.USER_AGENT)
@@ -37,10 +39,24 @@ class PapagoOCR(
                         Headers.Builder().addUnsafeNonAscii("Content-Disposition", "form-data;\r\nname=\"imageId\"").build(),
                         sha512(image).toRequestBody("text/plain".toMediaType())
                     ) */
-                    .addFormDataPart("lang", language.source.code)
-                    .addFormDataPart("source", language.source.code)
+                    .addFormDataPart(
+                        "lang",
+                        if (isSourceAuto) {
+                            "all"
+                        } else {
+                            language.source.code
+                        }
+                    )
+                    .addFormDataPart(
+                        "source",
+                        if (isSourceAuto) {
+                            language.target.code
+                        } else {
+                            language.source.code
+                        }
+                    )
                     .addFormDataPart("target", language.target.code)
-                    .addFormDataPart("langDetect", (language.source == Language.AUTO).toString())
+                    .addFormDataPart("langDetect", isSourceAuto.toString())
                     .addFormDataPart(
                         "image",
                         "image",
