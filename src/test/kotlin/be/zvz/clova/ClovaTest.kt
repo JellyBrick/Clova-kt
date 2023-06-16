@@ -131,7 +131,7 @@ class ClovaTest {
 
         val classUnderTest = Clova()
         val ocr = classUnderTest.ocr.getValue(Clova.OCR.PAPAGO).doOCR(
-            language = LanguageSetting(Language.JAPANESE, Language.KOREAN),
+            language = LanguageSetting(Language.AUTO, Language.KOREAN),
             image = getImageBytes("https://upload.wikimedia.org/wikipedia/commons/a/a6/Japanese_Residence_Card_Sample.jpg")
         )
         println(ocr)
