@@ -39,7 +39,9 @@ object Auth {
     fun signUrl(okHttpClient: OkHttpClient, url: String): Signature {
         val currentTimestamp = try {
             val currentTime = System.nanoTime()
-            if (executionTime == -1L || currentTime - executionTime > 1_000L * 1_000L * 1_000L * 60L * 10L /* 10 minutes */) {
+
+            // 10 minutes
+            if (executionTime == -1L || currentTime - executionTime > 1_000L * 1_000L * 1_000L * 60L * 10L) {
                 executionTime = System.nanoTime()
                 latestUpdatedTime = getCurrentTime(okHttpClient)
                 latestUpdatedTime
