@@ -34,7 +34,9 @@ object Auth {
             .header("User-Agent", Constants.USER_AGENT)
             .get()
             .build(),
-    ).execute().body.string().toLongOrDefault(System.currentTimeMillis())
+    ).execute().use {
+        it.body.string().toLongOrDefault(System.currentTimeMillis())
+    }
 
     fun signUrl(okHttpClient: OkHttpClient, url: String): Signature {
         val currentTimestamp = try {
