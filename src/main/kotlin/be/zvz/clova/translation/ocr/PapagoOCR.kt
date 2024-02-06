@@ -38,31 +38,32 @@ class PapagoOCR(
             method = io.ktor.http.HttpMethod.Post
             url(Auth.toSignedUrl(url, sign))
             userAgent(Constants.USER_AGENT)
-            setBody(MultiPartFormDataContent(
-                formData {
-                    if (isSourceAuto) {
-                        append("lang", "all")
-                        append("source", language.target.code)
-                    } else {
-                        append("lang", language.source.code)
-                        append("source", language.source.code)
-                    }
-                    append("target", language.target.code)
-                    append("langDetect", isSourceAuto.toString())
-                    append(
-                        "image",
-                        image.inputStream().buffered().use {
-                            it.readBytes()
-                        },
-                        Headers.build {
-                            append(HttpHeaders.ContentType, ContentType.Application.OctetStream.toString())
-                            append(HttpHeaders.ContentDisposition, "filename=image")
+            setBody(
+                MultiPartFormDataContent(
+                    formData {
+                        if (isSourceAuto) {
+                            append("lang", "all")
+                            append("source", language.target.code)
+                        } else {
+                            append("lang", language.source.code)
+                            append("source", language.source.code)
                         }
-                    )
-                }
-            ))
-            // FIXME: imageId
-            /**
+                        append("target", language.target.code)
+                        append("langDetect", isSourceAuto.toString())
+                        append(
+                            "image",
+                            image.inputStream().buffered().use {
+                                it.readBytes()
+                            },
+                            Headers.build {
+                                append(HttpHeaders.ContentType, ContentType.Application.OctetStream.toString())
+                                append(HttpHeaders.ContentDisposition, "filename=image")
+                            },
+                        )
+                    },
+                ),
+            )
+            /** FIXME: imageId
              * .addPart(
              *   Headers.Builder().addUnsafeNonAscii("Content-Disposition", "form-data;\r\nname=\"imageId\"").build(),
              *   sha512(image).toRequestBody("text/plain".toMediaType())

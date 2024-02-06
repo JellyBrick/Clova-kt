@@ -8,7 +8,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.post
 
 abstract class Translate(
-    protected val httpClient: HttpClient
+    protected val httpClient: HttpClient,
 ) {
     abstract fun buildTranslateRequest(
         language: LanguageSetting,
