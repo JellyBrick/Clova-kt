@@ -33,52 +33,63 @@ class ClovaTTS(okHttpClient: OkHttpClient) : TextToSpeech(okHttpClient) {
 
     companion object {
         @JvmStatic
-        val SPEAKERS = mapOf(
-            Language.ENGLISH to Constants.Speakers(
-                arrayOf(Constants.Speaker("matt")),
-                arrayOf(Constants.Speaker("clara")),
-            ),
-            Language.KOREAN to Constants.Speakers(
-                arrayOf(Constants.Speaker("jinho")),
-                arrayOf(Constants.Speaker("kyuri")),
-            ),
-            Language.JAPANESE to Constants.Speakers(
-                arrayOf(Constants.Speaker("shinji")),
-                arrayOf(Constants.Speaker("yuri"), Constants.Speaker("nsayuri")),
-            ),
-            Language.TRADITIONAL_CHINESE to Constants.Speakers(
-                arrayOf(Constants.Speaker("kuanlin")),
-                arrayOf(Constants.Speaker("chiahua")),
-            ),
-            Language.SIMPLIFIED_CHINESE to Constants.Speakers(
-                arrayOf(Constants.Speaker("liangliang")),
-                arrayOf(Constants.Speaker("meimei")),
-            ),
-            Language.SPANISH to Constants.Speakers(
-                arrayOf(Constants.Speaker("jose")),
-                arrayOf(Constants.Speaker("carmen")),
-            ),
-            Language.FRENCH to Constants.Speakers(
-                arrayOf(Constants.Speaker("louis")),
-                arrayOf(Constants.Speaker("roxane")),
-            ),
-            Language.DUTCH to Constants.Speakers(
-                arrayOf(Constants.Speaker("tim")),
-                arrayOf(Constants.Speaker("lena")),
-            ),
-            Language.RUSSIAN to Constants.Speakers(
-                arrayOf(Constants.Speaker("aleksei")),
-                arrayOf(Constants.Speaker("vera")),
-            ),
-            // Language.PORTUGUESE to Speakers(arrayOf(), arrayOf()),
-            // Language.ITALIAN to Speakers(arrayOf(), arrayOf()),
-            // Language.VIETNAMESE to Speakers(arrayOf(), arrayOf()),
-            Language.THAI to Constants.Speakers(
-                arrayOf(Constants.Speaker("sarawut")),
-                arrayOf(Constants.Speaker("somsi")),
-            ),
-            // Language.MALAY_INDONESIAN to Speakers(arrayOf(), arrayOf()),
-            // Language.HINDI to Speakers(arrayOf(), arrayOf())
-        )
+        val SPEAKERS =
+            mapOf(
+                Language.ENGLISH to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("matt")),
+                        arrayOf(Constants.Speaker("clara")),
+                    ),
+                Language.KOREAN to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("jinho")),
+                        arrayOf(Constants.Speaker("kyuri")),
+                    ),
+                Language.JAPANESE to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("shinji")),
+                        arrayOf(Constants.Speaker("yuri"), Constants.Speaker("nsayuri")),
+                    ),
+                Language.TRADITIONAL_CHINESE to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("kuanlin")),
+                        arrayOf(Constants.Speaker("chiahua")),
+                    ),
+                Language.SIMPLIFIED_CHINESE to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("liangliang")),
+                        arrayOf(Constants.Speaker("meimei")),
+                    ),
+                Language.SPANISH to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("jose")),
+                        arrayOf(Constants.Speaker("carmen")),
+                    ),
+                Language.FRENCH to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("louis")),
+                        arrayOf(Constants.Speaker("roxane")),
+                    ),
+                Language.DUTCH to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("tim")),
+                        arrayOf(Constants.Speaker("lena")),
+                    ),
+                Language.RUSSIAN to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("aleksei")),
+                        arrayOf(Constants.Speaker("vera")),
+                    ),
+                // Language.PORTUGUESE to Speakers(arrayOf(), arrayOf()),
+                // Language.ITALIAN to Speakers(arrayOf(), arrayOf()),
+                // Language.VIETNAMESE to Speakers(arrayOf(), arrayOf()),
+                Language.THAI to
+                    Constants.Speakers(
+                        arrayOf(Constants.Speaker("sarawut")),
+                        arrayOf(Constants.Speaker("somsi")),
+                    ),
+                // Language.MALAY_INDONESIAN to Speakers(arrayOf(), arrayOf()),
+                // Language.HINDI to Speakers(arrayOf(), arrayOf())
+            )
     }
 }

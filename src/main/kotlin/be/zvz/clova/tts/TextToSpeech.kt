@@ -18,12 +18,13 @@ abstract class TextToSpeech(protected val okHttpClient: OkHttpClient) {
         text: String,
         speaker: Constants.Speaker,
         speed: Speed,
-    ): ByteArray = okHttpClient.newCall(buildTTSRequest(text, speaker, speed)).execute().use { response ->
-        val bytes = response.body.bytes()
-        if (bytes.isNotEmpty()) {
-            bytes
-        } else {
-            throw NoDataReceivedException()
+    ): ByteArray =
+        okHttpClient.newCall(buildTTSRequest(text, speaker, speed)).execute().use { response ->
+            val bytes = response.body.bytes()
+            if (bytes.isNotEmpty()) {
+                bytes
+            } else {
+                throw NoDataReceivedException()
+            }
         }
-    }
 }

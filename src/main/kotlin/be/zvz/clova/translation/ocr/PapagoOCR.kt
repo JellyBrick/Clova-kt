@@ -16,12 +16,16 @@ class PapagoOCR(
     okHttpClient: OkHttpClient,
     objectMapper: ObjectMapper,
 ) : OpticalCharacterRecognition(okHttpClient, objectMapper) {
-    private fun sha512(source: ByteArray): String = MessageDigest
-        .getInstance("SHA-512")
-        .digest(source)
-        .joinToString(separator = "") { eachByte -> "%02x".format(eachByte) }
+    private fun sha512(source: ByteArray): String =
+        MessageDigest
+            .getInstance("SHA-512")
+            .digest(source)
+            .joinToString(separator = "") { eachByte -> "%02x".format(eachByte) }
 
-    override fun buildOCRRequest(language: LanguageSetting, image: ByteArray): Request {
+    override fun buildOCRRequest(
+        language: LanguageSetting,
+        image: ByteArray,
+    ): Request {
         val url = Constants.Url.PAPAGO + "ocr/detect"
         val sign = Auth.signUrl(okHttpClient, url)
 
