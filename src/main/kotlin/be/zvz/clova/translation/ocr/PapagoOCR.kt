@@ -35,10 +35,10 @@ class PapagoOCR(
             .url(Auth.toSignedUrl(url, sign))
             .header("User-Agent", Constants.USER_AGENT)
             .post(
+                // FIXME: imageId
                 MultipartBody
                     .Builder()
                     .setType(MultipartBody.FORM)
-                    // FIXME: imageId
                     /* .addPart(
                         Headers.Builder().addUnsafeNonAscii("Content-Disposition", "form-data;\r\nname=\"imageId\"").build(),
                         sha512(image).toRequestBody("text/plain".toMediaType())
