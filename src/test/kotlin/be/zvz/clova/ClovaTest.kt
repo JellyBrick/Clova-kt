@@ -10,7 +10,7 @@ import kotlin.test.assertTrue
 class ClovaTest {
     @Test fun testClovaTranslateAutoToJapanese() {
         val classUnderTest = Clova()
-        Clova.Translation.values().forEach {
+        Clova.Translation.entries.forEach {
             val translate = classUnderTest.translation.getValue(it).translate(
                 language = LanguageSetting(Language.AUTO, Language.JAPANESE),
                 text = "수고하셨습니다.\n번역기를 사용한 문장인데 어색하지는 않나요?",
@@ -25,7 +25,7 @@ class ClovaTest {
 
     @Test fun testClovaTranslateKoreanToEnglish() {
         val classUnderTest = Clova()
-        Clova.Translation.values().forEach {
+        Clova.Translation.entries.forEach {
             val translate = classUnderTest.translation.getValue(it).translate(
                 language = LanguageSetting(Language.KOREAN, Language.ENGLISH),
                 text = "수고하셨습니다.\n번역기를 사용한 문장인데 어색하지는 않나요?",
@@ -40,7 +40,7 @@ class ClovaTest {
 
     @Test fun testClovaTranslateJapaneseToKorean() {
         val classUnderTest = Clova()
-        Clova.Translation.values().forEach {
+        Clova.Translation.entries.forEach {
             val translate = classUnderTest.translation.getValue(it).translate(
                 language = LanguageSetting(Language.JAPANESE, Language.KOREAN),
                 text = "ラインID交換する？",
@@ -55,7 +55,7 @@ class ClovaTest {
 
     @Test fun testClovaTranslateJapaneseToEnglish() {
         val classUnderTest = Clova()
-        Clova.Translation.values().forEach {
+        Clova.Translation.entries.forEach {
             val translate = classUnderTest.translation.getValue(it).translate(
                 language = LanguageSetting(Language.JAPANESE, Language.ENGLISH),
                 text = "ラインID交換する？",
