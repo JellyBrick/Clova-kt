@@ -4,14 +4,17 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.internal.toLongOrDefault
 import okio.IOException
+import okio.withLock
 import java.net.URLEncoder
 import java.util.Base64
 import java.util.UUID
+import java.util.concurrent.locks.ReentrantLock
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import kotlin.math.min
 
 object Auth {
+    private val timeLock = ReentrantLock()
     private var executionTime = -1L
     private var latestUpdatedTime = -1L
     private val mac = Mac.getInstance("HmacSHA1").apply {
@@ -39,24 +42,26 @@ object Auth {
     }
 
     fun signUrl(okHttpClient: OkHttpClient, url: String): Signature {
-        val currentTimestamp = try {
-            val currentTime = System.nanoTime()
+        val currentTimestamp = timeLock.withLock {
+            try {
+                val currentTime = System.nanoTime()
 
-            // 10 minutes
-            if (executionTime == -1L || currentTime - executionTime > 1_000L * 1_000L * 1_000L * 60L * 10L) {
-                executionTime = System.nanoTime()
-                latestUpdatedTime = getCurrentTime(okHttpClient)
-                latestUpdatedTime
-            } else {
-                getCachedCurrentTime(currentTime)
+                // 10 minutes
+                if (executionTime == -1L || currentTime - executionTime > 1_000L * 1_000L * 1_000L * 60L * 10L) {
+                    executionTime = System.nanoTime()
+                    latestUpdatedTime = getCurrentTime(okHttpClient)
+                    latestUpdatedTime
+                } else {
+                    getCachedCurrentTime(currentTime)
+                }
+            } catch (ignored: IOException) {
+                System.currentTimeMillis()
             }
-        } catch (ignored: IOException) {
-            System.currentTimeMillis()
         }
         return Signature(
             currentTimestamp,
             Base64.getEncoder().encodeToString(
-                mac.doFinal(
+                (mac.clone() as Mac).doFinal(
                     (url.substring(0, min(255, url.length)) + currentTimestamp).toByteArray(),
                 ),
             ),

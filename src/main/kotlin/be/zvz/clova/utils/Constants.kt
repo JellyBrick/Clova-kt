@@ -8,9 +8,9 @@ object Constants {
         const val PAPAGO = "https://apis.naver.com/papago/papago_app/"
     }
 
-    const val API_VERSION = "1.9.14"
+    const val API_VERSION = "1.10.7"
     const val KEY = "aVwDprJBYvnz1NBs8W7GBuaHQDeoynolGF5IdsxyYP6lyCzxAOG38hleJo43NnB6"
-    const val USER_AGENT = "Translator/49.0 CFNetwork/1402.0.8 Darwin/22.2.0"
+    const val USER_AGENT = "Translator/51.9 CFNetwork/1494.0.5 Darwin/23.4.0"
 
     val LANGUAGES = mapOf(
         Language.ENGLISH to "English",
