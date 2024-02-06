@@ -4,18 +4,21 @@ import be.zvz.clova.Language
 import be.zvz.clova.LanguageSetting
 import be.zvz.clova.utils.Auth
 import be.zvz.clova.utils.Constants
-import com.fasterxml.jackson.databind.ObjectMapper
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
+import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
+import io.ktor.client.request.setBody
+import io.ktor.client.request.url
+import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
+import io.ktor.http.userAgent
 import java.security.MessageDigest
 
 class PapagoOCR(
-    okHttpClient: OkHttpClient,
-    objectMapper: ObjectMapper,
-) : OpticalCharacterRecognition(okHttpClient, objectMapper) {
+    httpClient: HttpClient,
+) : OpticalCharacterRecognition(httpClient) {
     private fun sha512(source: ByteArray): String =
         MessageDigest
             .getInstance("SHA-512")
@@ -25,48 +28,46 @@ class PapagoOCR(
     override fun buildOCRRequest(
         language: LanguageSetting,
         image: ByteArray,
-    ): Request {
+    ): HttpRequestBuilder {
         val url = Constants.Url.PAPAGO + "ocr/detect"
-        val sign = Auth.signUrl(okHttpClient, url)
+        val sign = Auth.signUrl(httpClient, url)
 
         val isSourceAuto = language.source == Language.AUTO
 
-        return Request.Builder()
-            .url(Auth.toSignedUrl(url, sign))
-            .header("User-Agent", Constants.USER_AGENT)
-            .post(
-                // FIXME: imageId
-                MultipartBody
-                    .Builder()
-                    .setType(MultipartBody.FORM)
-                    /* .addPart(
-                        Headers.Builder().addUnsafeNonAscii("Content-Disposition", "form-data;\r\nname=\"imageId\"").build(),
-                        sha512(image).toRequestBody("text/plain".toMediaType())
-                    ) */
-                    .addFormDataPart(
-                        "lang",
-                        if (isSourceAuto) {
-                            "all"
-                        } else {
-                            language.source.code
-                        },
-                    )
-                    .addFormDataPart(
-                        "source",
-                        if (isSourceAuto) {
-                            language.target.code
-                        } else {
-                            language.source.code
-                        },
-                    )
-                    .addFormDataPart("target", language.target.code)
-                    .addFormDataPart("langDetect", isSourceAuto.toString())
-                    .addFormDataPart(
+        return HttpRequestBuilder().apply {
+            method = io.ktor.http.HttpMethod.Post
+            url(Auth.toSignedUrl(url, sign))
+            userAgent(Constants.USER_AGENT)
+            setBody(MultiPartFormDataContent(
+                formData {
+                    if (isSourceAuto) {
+                        append("lang", "all")
+                        append("source", language.target.code)
+                    } else {
+                        append("lang", language.source.code)
+                        append("source", language.source.code)
+                    }
+                    append("target", language.target.code)
+                    append("langDetect", isSourceAuto.toString())
+                    append(
                         "image",
-                        "image",
-                        image.toRequestBody("application/octet-stream".toMediaType(), 0, image.size),
+                        image.inputStream().buffered().use {
+                            it.readBytes()
+                        },
+                        Headers.build {
+                            append(HttpHeaders.ContentType, ContentType.Application.OctetStream.toString())
+                            append(HttpHeaders.ContentDisposition, "filename=image")
+                        }
                     )
-                    .build(),
-            ).build()
+                }
+            ))
+            // FIXME: imageId
+            /**
+             * .addPart(
+             *   Headers.Builder().addUnsafeNonAscii("Content-Disposition", "form-data;\r\nname=\"imageId\"").build(),
+             *   sha512(image).toRequestBody("text/plain".toMediaType())
+             * )
+             */
+        }
     }
 }

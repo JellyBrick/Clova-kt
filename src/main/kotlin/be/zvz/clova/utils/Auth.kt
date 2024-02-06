@@ -1,16 +1,18 @@
 package be.zvz.clova.utils
 
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.internal.toLongOrDefault
-import okio.IOException
-import okio.withLock
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.runBlocking
+import java.io.IOException
 import java.net.URLEncoder
 import java.util.Base64
 import java.util.UUID
 import java.util.concurrent.locks.ReentrantLock
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import kotlin.concurrent.withLock
 import kotlin.math.min
 
 object Auth {
@@ -33,19 +35,18 @@ object Auth {
 
     fun getCachedCurrentTime(currentTime: Long): Long = latestUpdatedTime + (currentTime - executionTime) / 1_000L * 1_000L
 
-    fun getCurrentTime(okHttpClient: OkHttpClient): Long =
-        okHttpClient.newCall(
-            Request.Builder()
-                .url(Constants.Url.CURRENT_TIME)
-                .header("User-Agent", Constants.USER_AGENT)
-                .get()
-                .build(),
-        ).execute().use {
-            it.body.string().toLongOrDefault(System.currentTimeMillis())
+    fun getCurrentTime(httpClient: HttpClient): Long =
+        runBlocking {
+            val response =
+                httpClient.get(Constants.Url.CURRENT_TIME) {
+                    header("User-Agent", Constants.USER_AGENT)
+                }
+
+            return@runBlocking response.bodyAsText().toLongOrNull() ?: System.currentTimeMillis()
         }
 
     fun signUrl(
-        okHttpClient: OkHttpClient,
+        httpClient: HttpClient,
         url: String,
     ): Signature {
         val currentTimestamp =
@@ -56,7 +57,7 @@ object Auth {
                     // 10 minutes
                     if (executionTime == -1L || currentTime - executionTime > 1_000L * 1_000L * 1_000L * 60L * 10L) {
                         executionTime = System.nanoTime()
-                        latestUpdatedTime = getCurrentTime(okHttpClient)
+                        latestUpdatedTime = getCurrentTime(httpClient)
                         latestUpdatedTime
                     } else {
                         getCachedCurrentTime(currentTime)

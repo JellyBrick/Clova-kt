@@ -25,11 +25,13 @@ dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-    // okhttp
-    api(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.12")
+    // ktor
+    api(group = "io.ktor", name = "ktor-client", version = "2.3.8")
 
     // Jackson
     implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.16.1")
+    api(group = "io.ktor", name = "ktor-serialization-jackson", version = "2.3.8")
+    api(group = "io.ktor", name = "ktor-client-content-negotiation", version = "2.3.8")
 
     // Use the Kotlin JDK 8 standard library.
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
@@ -39,6 +41,7 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation(group = "org.jetbrains.kotlin", name = "kotlin-test-junit")
+    testImplementation(group = "io.ktor", name = "ktor-client-jetty", version = "2.3.8")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

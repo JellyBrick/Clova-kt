@@ -4,31 +4,39 @@ import be.zvz.clova.Language
 import be.zvz.clova.Speed
 import be.zvz.clova.utils.Auth
 import be.zvz.clova.utils.Constants
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.setBody
+import io.ktor.client.request.url
+import io.ktor.http.ContentType
+import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
+import io.ktor.http.formUrlEncode
+import io.ktor.http.userAgent
 
-class ClovaTTS(okHttpClient: OkHttpClient) : TextToSpeech(okHttpClient) {
+class ClovaTTS(httpClient: HttpClient) : TextToSpeech(httpClient) {
     override fun buildTTSRequest(
         text: String,
         speaker: Constants.Speaker,
         speed: Speed,
         volume: Int,
-    ): Request {
+    ): HttpRequestBuilder {
         val url = Constants.Url.PAPAGO + "tts/makeTTS"
-        val sign = Auth.signUrl(okHttpClient, url)
-        return Request.Builder()
-            .url(Auth.toSignedUrl(url, sign))
-            .header("User-Agent", Constants.USER_AGENT)
-            .post(
-                FormBody
-                    .Builder()
-                    .add("text", text)
-                    .addEncoded("speaker", speaker.name)
-                    .addEncoded("speed", speed.code.toString())
-                    .addEncoded("volume", volume.toString())
-                    .build(),
-            ).build()
+        val sign = Auth.signUrl(httpClient, url)
+        return HttpRequestBuilder().apply {
+            url(Auth.toSignedUrl(url, sign))
+            userAgent(Constants.USER_AGENT)
+            method = HttpMethod.Post
+            contentType(ContentType.Application.FormUrlEncoded)
+            setBody(
+                io.ktor.http.ParametersBuilder().apply {
+                    append("text", text)
+                    append("speaker", speaker.name)
+                    append("speed", speed.code.toString())
+                    append("volume", volume.toString())
+                }.build().formUrlEncode(),
+            )
+        }
     }
 
     companion object {
