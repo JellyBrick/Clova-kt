@@ -26,7 +26,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // ktor
-    api(group = "io.ktor", name = "ktor-client", version = "2.3.8")
+    api(group = "io.ktor", name = "ktor-client", version = "2.3.9")
 
     // Jackson
     implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.16.1")
