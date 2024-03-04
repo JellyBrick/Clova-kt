@@ -41,7 +41,7 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation(group = "org.jetbrains.kotlin", name = "kotlin-test-junit")
-    testImplementation(group = "io.ktor", name = "ktor-client-jetty", version = "2.3.8")
+    testImplementation(group = "io.ktor", name = "ktor-client-jetty", version = "2.3.9")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
