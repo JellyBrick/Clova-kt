@@ -31,7 +31,7 @@ dependencies {
     // Jackson
     implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.16.1")
     api(group = "io.ktor", name = "ktor-serialization-jackson", version = "2.3.8")
-    api(group = "io.ktor", name = "ktor-client-content-negotiation", version = "2.3.8")
+    api(group = "io.ktor", name = "ktor-client-content-negotiation", version = "2.3.9")
 
     // Use the Kotlin JDK 8 standard library.
     implementation(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
