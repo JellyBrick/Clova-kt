@@ -29,7 +29,7 @@ dependencies {
     api(group = "io.ktor", name = "ktor-client", version = "2.3.8")
 
     // Jackson
-    implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.16.1")
+    implementation(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = "2.17.0")
     api(group = "io.ktor", name = "ktor-serialization-jackson", version = "2.3.8")
     api(group = "io.ktor", name = "ktor-client-content-negotiation", version = "2.3.8")
 
